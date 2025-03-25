@@ -569,7 +569,15 @@ export default function Dashboard() {
           <tbody>
             {filteredData.map((c, i) => (
               <tr key={i} className="border-t">
-                <td className="p-2">{c.company}</td>
+                <td className="p-2">
+  {c.company}
+  {c.tech?.includes("SAP Ariba") && (
+    <div className="flex items-center space-x-2 mt-1">
+      <img src="/sap-ariba.png" alt="SAP Ariba" className="w-4 h-4" />
+      <span className="text-blue-600 text-xs font-semibold">SAP Ariba</span>
+    </div>
+  )}
+</td>
                 <td className="p-2">{c.score}</td>
                 <td className="p-2">
                   <span className={`px-2 py-1 rounded-full text-xs font-semibold ${heatBadgeColor(c.heat)}`}>
