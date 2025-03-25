@@ -27,7 +27,10 @@ const companyData = [
     "trend": "+3",
     "industry": "Manufacturing, Motor Vehicles",
     "location": "Paris, France",
-    "size": "10,001+"
+    "size": "10,001+",
+    "tech": [
+      "SAP Ariba"
+    ]
   },
   {
     "company": "Fives ECL",
@@ -63,7 +66,10 @@ const companyData = [
     "trend": "0",
     "industry": "Manufacturing, Industrial",
     "location": "Ancenis, France",
-    "size": "1,001 - 5,000"
+    "size": "1,001 - 5,000",
+    "tech": [
+      "SAP Ariba"
+    ]
   },
   {
     "company": "Fives Nordon",
@@ -135,7 +141,10 @@ const companyData = [
     "trend": "+1",
     "industry": "Manufacturing, Motor Vehicles",
     "location": "Clermont-Ferrand, France",
-    "size": "10,001+"
+    "size": "10,001+",
+    "tech": [
+      "SAP Ariba"
+    ]
   },
   {
     "company": "Servier",
@@ -279,7 +288,10 @@ const companyData = [
     "trend": "0",
     "industry": "Manufacturing, Chemicals",
     "location": "Lestrem, France",
-    "size": "5,001 - 10,000"
+    "size": "5,001 - 10,000",
+    "tech": [
+      "SAP Ariba"
+    ]
   },
   {
     "company": "Novartis France",
@@ -414,7 +426,10 @@ const companyData = [
     "trend": "0",
     "industry": "Manufacturing, Industrial",
     "location": "Paris, France",
-    "size": "10,001+"
+    "size": "10,001+",
+    "tech": [
+      "SAP Ariba"
+    ]
   },
   {
     "company": "Liebherr Aerospace",
@@ -504,7 +519,10 @@ const companyData = [
     "trend": "+1",
     "industry": "Manufacturing, Personal Care",
     "location": "Paris, France",
-    "size": "10,001+"
+    "size": "10,001+",
+    "tech": [
+      "SAP Ariba"
+    ]
   },
   {
     "company": "Danone",
@@ -513,7 +531,10 @@ const companyData = [
     "trend": "+1",
     "industry": "Manufacturing, Food & Beverage",
     "location": "Paris, France",
-    "size": "10,001+"
+    "size": "10,001+",
+    "tech": [
+      "SAP Ariba"
+    ]
   },
   {
     "company": "INGERSOLL RAND FRANCE",
@@ -570,14 +591,14 @@ export default function Dashboard() {
             {filteredData.map((c, i) => (
               <tr key={i} className="border-t">
                 <td className="p-2">
-  {c.company}
-  {c.tech?.includes("SAP Ariba") && (
-    <div className="flex items-center space-x-2 mt-1">
-      <img src="/sap-ariba.png" alt="SAP Ariba" className="w-4 h-4" />
-      <span className="text-blue-600 text-xs font-semibold">SAP Ariba</span>
-    </div>
-  )}
-</td>
+                  {c.company}
+                  {c.tech?.includes("SAP Ariba") && (
+                    <div className="flex items-center space-x-2 mt-1">
+                      <img src="/sap-ariba.png" alt="SAP Ariba" className="w-4 h-4" />
+                      <span className="text-blue-600 text-xs font-semibold">SAP Ariba</span>
+                    </div>
+                  )}
+                </td>
                 <td className="p-2">{c.score}</td>
                 <td className="p-2">
                   <span className={`px-2 py-1 rounded-full text-xs font-semibold ${heatBadgeColor(c.heat)}`}>
