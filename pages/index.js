@@ -1,5 +1,29 @@
 
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from "@/components/ui/table";
+
+const heatBadgeColor = (heat) => {
+  switch (heat) {
+    case "Very Hot":
+      return "bg-red-500 text-white";
+    case "Hot":
+      return "bg-orange-400 text-white";
+    case "Warm":
+      return "bg-yellow-300 text-black";
+    default:
+      return "bg-gray-200 text-black";
+  }
+};
 
 const companyData = [
   {
@@ -426,10 +450,7 @@ const companyData = [
     "trend": "0",
     "industry": "Manufacturing, Industrial",
     "location": "Paris, France",
-    "size": "10,001+",
-    "tech": [
-      "SAP Ariba"
-    ]
+    "size": "10,001+"
   },
   {
     "company": "Liebherr Aerospace",
@@ -519,10 +540,7 @@ const companyData = [
     "trend": "+1",
     "industry": "Manufacturing, Personal Care",
     "location": "Paris, France",
-    "size": "10,001+",
-    "tech": [
-      "SAP Ariba"
-    ]
+    "size": "10,001+"
   },
   {
     "company": "Danone",
@@ -556,64 +574,59 @@ export default function Dashboard() {
     c.location.toLowerCase().includes(search.toLowerCase())
   );
 
-  const heatBadgeColor = (heat) => {
-    if (heat === "Very Hot") return "bg-red-500 text-white";
-    if (heat === "Hot") return "bg-orange-400 text-white";
-    if (heat === "Warm") return "bg-yellow-300 text-black";
-    return "bg-gray-200 text-black";
-  };
-
   return (
     <div className="p-6 space-y-6">
       <h1 className="text-2xl font-bold">French Manufacturing Companies Dashboard</h1>
-      <input
-        type="text"
-        placeholder="Search..."
+
+      <Input
+        placeholder="Search by company, industry, or location"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="border p-2 rounded w-full max-w-md"
+        className="max-w-md"
       />
 
-      <div className="overflow-auto border rounded-lg mt-4">
-        <table className="min-w-full text-sm text-left">
-          <thead className="bg-gray-100 font-semibold">
-            <tr>
-              <th className="p-2">Company</th>
-              <th className="p-2">Score</th>
-              <th className="p-2">Heat</th>
-              <th className="p-2">Trend</th>
-              <th className="p-2">Industry</th>
-              <th className="p-2">Location</th>
-              <th className="p-2">Size</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredData.map((c, i) => (
-              <tr key={i} className="border-t">
-                <td className="p-2">
-                  {c.company}
-                  {c.tech?.includes("SAP Ariba") && (
-                    <div className="flex items-center space-x-2 mt-1">
-                      <img src="/sap-ariba.png" alt="SAP Ariba" className="w-4 h-4" />
-                      <span className="text-blue-600 text-xs font-semibold">SAP Ariba</span>
-                    </div>
-                  )}
-                </td>
-                <td className="p-2">{c.score}</td>
-                <td className="p-2">
-                  <span className={`px-2 py-1 rounded-full text-xs font-semibold ${heatBadgeColor(c.heat)}`}>
-                    {c.heat}
-                  </span>
-                </td>
-                <td className="p-2">{c.trend}</td>
-                <td className="p-2">{c.industry}</td>
-                <td className="p-2">{c.location}</td>
-                <td className="p-2">{c.size}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <Card>
+        <CardContent className="overflow-auto">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Company</TableHead>
+                <TableHead>Score</TableHead>
+                <TableHead>Heat</TableHead>
+                <TableHead>Trend</TableHead>
+                <TableHead>Industry</TableHead>
+                <TableHead>Location</TableHead>
+                <TableHead>Size</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredData.map((c, i) => (
+                <TableRow key={i}>
+                  <TableCell>
+                    {c.company}
+                    {c.tech?.includes("SAP Ariba") && (
+                      <div className="flex items-center space-x-2 mt-1">
+                        <img src="/sap-ariba.png" alt="SAP Ariba" className="w-4 h-4" />
+                        <span className="text-blue-600 text-xs font-semibold">SAP Ariba</span>
+                      </div>
+                    )}
+                  </TableCell>
+                  <TableCell>{c.score}</TableCell>
+                  <TableCell>
+                    <span className={`px-2 py-1 rounded-full text-xs font-semibold ${heatBadgeColor(c.heat)}`}>
+                      {c.heat}
+                    </span>
+                  </TableCell>
+                  <TableCell>{c.trend}</TableCell>
+                  <TableCell>{c.industry}</TableCell>
+                  <TableCell>{c.location}</TableCell>
+                  <TableCell>{c.size}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </div>
   );
 }
